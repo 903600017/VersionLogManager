@@ -19,8 +19,9 @@ public class VersionLogManager {
         if (vLogFile.exists()) {
             Type versionLogListType = new TypeToken<ArrayList<VersionLog>>() {}.getType();
             return GSonFactory.instance.gson.fromJson(vLogFile.newReader("utf-8"), versionLogListType);
+        }else{
+            return null
         }
-        return null
     }
 
     public synchronized void add(VersionLog vLog) {

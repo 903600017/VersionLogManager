@@ -22,7 +22,7 @@ if (bintrayConfigFile.exists()) {
 
 def isSnapshot = false
 
-version '1.0.0'
+version '1.0.1'
 
 if (isSnapshot) {
     version (version + "-SNAPSHOT")
@@ -32,7 +32,6 @@ group 'com.zf.plugins'
 
 def gitUrl = "https://github.com/903600017/VersionLogManager.git"
 def siteUrl = gitUrl
-
 
 
 gitConfig {

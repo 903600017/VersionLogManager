@@ -6,9 +6,6 @@ import org.gradle.api.tasks.TaskAction
 
 public class BuildLogTask extends DefaultTask {
 
-    private final static String TEMPLE_DIR_NAME = "temple"
-    private final static String LOGS_FILE_NAME = "VersionLog.json"
-
     String templeFileName
 
     def checkVersionLogConfig() {
@@ -31,13 +28,14 @@ public class BuildLogTask extends DefaultTask {
     @TaskAction
     public void run() throws Exception {
 
-        checkVersionLogConfig();
+        checkVersionLogConfig()
+
         VersionLogConfig vLogConfig = VersionLogConfig.getConfig(project);
 
-        File templeFile = new File(vLogConfig.vLogWorkDir, TEMPLE_DIR_NAME);
+        File templeFile = new File(vLogConfig.vLogWorkDir, Constant.TEMPLE_DIR_NAME);
         BuildLogFactory buildLogFactory = new BuildLogFactory(templeFile)
 
-        File vLogFile = new File(vLogConfig.vLogWorkDir, LOGS_FILE_NAME)
+        File vLogFile = new File(vLogConfig.vLogWorkDir, Constant.LOG_SAVE_FILE_NAME)
         VersionLogManager versionLogManager = new VersionLogManager(vLogFile)
 
         def log = versionLogManager.getAllLog()

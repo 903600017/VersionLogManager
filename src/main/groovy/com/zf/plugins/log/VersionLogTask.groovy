@@ -74,7 +74,7 @@ public class VersionLogTask extends DefaultTask {
     public void run() throws Exception {
         checkVersionLogConfig()
         VersionLogConfig versionLogConfig = VersionLogConfig.getConfig(project)
-        File vLogFile = new File(versionLogConfig.vLogWorkDir, LOGS_FILE_NAME)
+        File vLogFile = new File(versionLogConfig.vLogWorkDir, Constant.LOG_SAVE_FILE_NAME)
         VersionLogManager versionLogManager = new VersionLogManager(vLogFile)
         VersionLog versionLog = getCurrentVersionLog(versionLogConfig.logInfo)
         versionLogManager.add(versionLog)

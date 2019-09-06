@@ -21,7 +21,6 @@ class VersionLogPlugin implements Plugin<Project> {
                 project.logger.quiet(content)
             }
         })
-
         createVersionLogTask(project)
     }
 
@@ -40,31 +39,32 @@ class VersionLogPlugin implements Plugin<Project> {
                 }
             }
 
-            def templeDir = new File(project[sPluginExtensionName].vLogWorkDir, "temple")
-            if (templeDir.exists() || templeDir.isDirectory()) {
-                def files = templeDir.listFiles();
-                if (files != null) {
-                    files.each { File templeFile ->
+            if (project[sPluginExtensionName] && project[sPluginExtensionName].vLogWorkDir) {
+                def templeDir = new File(project[sPluginExtensionName].vLogWorkDir, Constant.TEMPLE_DIR_NAME)
+                if (templeDir.exists() || templeDir.isDirectory()) {
+                    def files = templeDir.listFiles();
+                    if (files != null) {
+                        files.each { File templeFile ->
 
-                        def _templeFileNameWithSuffix = templeFile.getName()
-                        def _templeFileName = Utils.getFileName(templeFile)
+                            def _templeFileNameWithSuffix = templeFile.getName()
+                            def _templeFileName = Utils.getFileName(templeFile)
 
-                        project.tasks.create("build${_templeFileName.capitalize()}", BuildLogTask) {
-                            description "生成日志"
-                            group "Version Log"
-                            templeFileName _templeFileNameWithSuffix
-                            doFirst {
-                                project.logger.println("开始生成日志")
-                            }
+                            project.tasks.create("build${_templeFileName.capitalize()}", BuildLogTask) {
+                                description "生成日志"
+                                group "Version Log"
+                                templeFileName _templeFileNameWithSuffix
+                                doFirst {
+                                    project.logger.println("开始生成日志")
+                                }
 
-                            doLast {
-                                project.logger.println("生成日志完成")
+                                doLast {
+                                    project.logger.println("生成日志完成")
+                                }
                             }
                         }
                     }
                 }
             }
-
         }
     }
 

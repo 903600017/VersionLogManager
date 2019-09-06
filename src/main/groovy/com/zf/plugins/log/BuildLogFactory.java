@@ -29,9 +29,7 @@ public class BuildLogFactory {
 
         Map<String, Object> root = new HashMap<>();
         root.put("logInfos", logs);
-
         Template temp = cfg.getTemplate(templeFileName);
-
         FileOutputStream fos = new FileOutputStream(logFile);
         Writer out = new OutputStreamWriter(fos);
         temp.process(root, out);
