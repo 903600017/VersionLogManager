@@ -1,0 +1,40 @@
+
+## gradle配置
+
+vLogConfig {
+    //工作目录
+    vLogWorkDir = new File("E:\XXXXX\")
+
+    //版本日志记录
+    logInfo {
+         //版本号
+         versionCode = 12
+         //版本名称
+         versionName ='v1.1.0'
+         //日志保存文件
+         logFile = new File("E:\XXXXX\log.txt")
+         //备注
+         remark = "备注"
+    }
+}
+
+## 自定义日志输出模板
+
+1.在vLogWorkDir所指定的目录下新建名称为"temple"文件夹
+
+2.在"temple"文件夹中新建log.md文件
+
+3.输入下面模板内容
+<#list logInfos as logInfo>
+### ${logInfo.versionCode}
+<#list logInfo.logs as log>
+${log}
+</#list>
+</#list>
+
+4.同步一下gradle,这时就有个"buildMarkDown"命令了
+
+5.在terminal 下执行命令
+
+    windows:gradlew buildDefault
+    linux:./gradlew buildDefault
