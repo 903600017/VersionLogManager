@@ -46,7 +46,7 @@ public class VersionLogTask extends DefaultTask {
         }
     }
 
-    def getCurrentVersionLog(VersionLogDto versionLogDto) {
+    def  getCurrentVersionLog(VersionLogDto versionLogDto) {
         def time = System.currentTimeMillis()
         def currentLogs = getUpdateContent(versionLogDto.logFile)
         def log = new VersionLog();
@@ -78,6 +78,7 @@ public class VersionLogTask extends DefaultTask {
         VersionLogManager versionLogManager = new VersionLogManager(vLogFile)
         VersionLog versionLog = getCurrentVersionLog(versionLogConfig.logInfo)
         versionLogManager.add(versionLog)
+        logger.quiet(GSonFactory.instance.GSon.toJson(versionLog))
     }
 
 }

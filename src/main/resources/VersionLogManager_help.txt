@@ -18,21 +18,31 @@ vLogConfig {
     }
 }
 
+
+## 日志保存位置
+
+    日志记录保存在 "vLogWorkDir"文件夹下的"versionLog.json"中
+
+## 日志文件输出的样式不是自己要想的怎么
+
+    可以通过定义输出模板来定义日志样式
+
 ## 自定义日志输出模板
 
 1.在vLogWorkDir所指定的目录下新建名称为"temple"文件夹
 
 2.在"temple"文件夹中新建log.md文件
 
-3.输入下面模板内容
+3.输入下面模板内容，可用的数据可以参考"vLogWorkDir"文件夹下的"versionLog.json"文件的描述或下面的例子
 <#list logInfos as logInfo>
-### ${logInfo.versionCode}
+
+### ${logInfo.versionName}
 <#list logInfo.logs as log>
 ${log}
 </#list>
 </#list>
 
-4.同步一下gradle,这时就有个"buildMarkDown"命令了
+4.同步一下gradle,这时就有个"buildLog"命令了
 
 5.在terminal 下执行命令
 

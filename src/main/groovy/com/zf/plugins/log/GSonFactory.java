@@ -5,28 +5,28 @@ import com.google.gson.GsonBuilder;
 
 public class GSonFactory {
 
-    public static GSonFactory sGsonFactory;
+    public static GSonFactory sGSonFactory;
 
-    private Gson gson;
+    private Gson mGSon;
 
     private GSonFactory() {
-        gson= new GsonBuilder()
+        mGSon= new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
     }
 
     public static GSonFactory getInstance() {
-        if (sGsonFactory == null) {
+        if (sGSonFactory == null) {
             synchronized (GSonFactory.class) {
-                if (sGsonFactory == null) {
-                    sGsonFactory = new GSonFactory();
+                if (sGSonFactory == null) {
+                    sGSonFactory = new GSonFactory();
                 }
             }
         }
-        return sGsonFactory;
+        return sGSonFactory;
     }
 
-    public Gson getGson() {
-        return gson;
+    public Gson getGSon() {
+        return mGSon;
     }
 }

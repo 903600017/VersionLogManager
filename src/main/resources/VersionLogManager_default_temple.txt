@@ -1,6 +1,0 @@
-<#list logInfos as logInfo>
-### ${logInfo.versionCode}
-<#list logInfo.logs as log>
-${log}
-</#list>
-</#list>

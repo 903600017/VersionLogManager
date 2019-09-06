@@ -2,10 +2,7 @@ package com.zf.plugins.log
 
 import com.google.gson.reflect.TypeToken
 
-import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Type
 
 public class VersionLogManager {
 
@@ -18,8 +15,8 @@ public class VersionLogManager {
     public List<VersionLog> getAllLog() {
         if (vLogFile.exists()) {
             Type versionLogListType = new TypeToken<ArrayList<VersionLog>>() {}.getType();
-            return GSonFactory.instance.gson.fromJson(vLogFile.newReader("utf-8"), versionLogListType);
-        }else{
+            return GSonFactory.instance.GSon.fromJson(vLogFile.newReader("utf-8"), versionLogListType);
+        } else {
             return null
         }
     }
@@ -43,7 +40,7 @@ public class VersionLogManager {
 
         Collections.sort(logs)
 
-        def jsonString = GSonFactory.instance.gson.toJson(logs);
+        def jsonString = GSonFactory.instance.GSon.toJson(logs);
         vLogFile.write(jsonString)
     }
 

@@ -24,7 +24,7 @@ class VersionLogConfig {
         if (logInfo == null) {
             logInfo = new VersionLogDto()
         }
-        action.execute(logInfo);
+        action.execute(logInfo)
     }
 
     void logInfo(Closure c) {

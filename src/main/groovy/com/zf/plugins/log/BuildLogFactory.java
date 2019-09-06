@@ -33,5 +33,7 @@ public class BuildLogFactory {
         FileOutputStream fos = new FileOutputStream(logFile);
         Writer out = new OutputStreamWriter(fos);
         temp.process(root, out);
+        out.close();
+
     }
 }
