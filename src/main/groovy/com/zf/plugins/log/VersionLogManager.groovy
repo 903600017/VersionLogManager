@@ -21,7 +21,7 @@ public class VersionLogManager {
         }
     }
 
-    public synchronized void add(VersionLog vLog) {
+    public synchronized void save(VersionLog vLog) {
         def logs = getAllLog()
 
         if (logs == null) {

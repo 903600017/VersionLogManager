@@ -1,11 +1,14 @@
 package com.zf.plugins.log;
 
-import java.util.ArrayList;
-
 public class VersionLogDto {
     Integer versionCode
-    String versionName
-    File logFile
-    String remark
+    String versionName;
+    File logFile;
+    Map<String, Object> extraMap = new HashMap<>();
+
+    public void putExtra(String key, Object value) {
+        extraMap.put(key, value)
+    }
+
 }
 

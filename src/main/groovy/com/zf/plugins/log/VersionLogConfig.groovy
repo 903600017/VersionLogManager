@@ -4,8 +4,10 @@ import org.gradle.api.Action
 import org.gradle.api.Project
 
 class VersionLogConfig {
+    Integer versionCode
     File vLogWorkDir
     VersionLogDto logInfo
+
 
     void vLogWorkDir(File vLogWorkDir) {
         this.vLogWorkDir = vLogWorkDir

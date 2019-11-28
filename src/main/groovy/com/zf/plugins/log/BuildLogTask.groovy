@@ -44,7 +44,10 @@ public class BuildLogTask extends DefaultTask {
         }
         def file = new File(vLogConfig.vLogWorkDir, templeFileName)
         if (file.exists()) {
-            throw new GradleException("已存在日志文件(${file.absolutePath}),请手动删除后再生成")
+            def delete = file.delete();
+            if (!delete) {
+                throw new GradleException("删除已存在生成的日志文件(${file.absolutePath})失败,请手动删除后再生成")
+            }
         }
         buildLogFactory.buildLog(templeFileName, log, file)
         logger.quiet(file.absolutePath)

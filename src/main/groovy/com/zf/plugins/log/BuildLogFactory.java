@@ -25,7 +25,7 @@ public class BuildLogFactory {
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }
 
-    public void buildLog(String templeFileName, ArrayList<String> logs, File logFile) throws IOException, TemplateException {
+    public void buildLog(String templeFileName, ArrayList<VersionLog> logs, File logFile) throws IOException, TemplateException {
 
         Map<String, Object> root = new HashMap<>();
         root.put("logInfos", logs);

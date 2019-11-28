@@ -5,8 +5,9 @@ public class VersionLog implements Comparable<VersionLog> {
     String versionName
     long updateTime
     long addTime
-    String remark
+
     ArrayList<String> logs = new ArrayList<>();
+    Map<String,Object> extraMap=new HashMap<>()
 
     VersionLog() {
     }

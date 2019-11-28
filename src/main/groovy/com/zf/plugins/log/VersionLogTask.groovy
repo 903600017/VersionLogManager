@@ -6,9 +6,6 @@ import org.gradle.api.tasks.TaskAction
 
 public class VersionLogTask extends DefaultTask {
 
-    private final static String LOGS_FILE_NAME = "VersionLog.json"
-
-
     def checkVersionLogConfig() {
 
         VersionLogConfig vLogConfig = VersionLogConfig.getConfig(project);
@@ -46,7 +43,25 @@ public class VersionLogTask extends DefaultTask {
         }
     }
 
-    def  getCurrentVersionLog(VersionLogDto versionLogDto) {
+    /**
+     * 生成默认的模板 demo
+     * @param versionLogConfig
+     * @return
+     */
+    def createDefaultLogTempleFile(VersionLogConfig versionLogConfig) {
+        File templeDir = new File(versionLogConfig.vLogWorkDir, Constant.TEMPLE_DIR_NAME)
+        if (!templeDir.exists()) {
+            templeDir.mkdirs();
+        }
+        File logDemoTempleFile = new File(templeDir, Constant.DEFAULT_LOG_TEMPLE_NAME);
+        if (!logDemoTempleFile.exists()) {
+            def defaultLogTemple = Utils.getResourceContent(Constant.DEFAULT_LOG_TEMPLE_NAME);
+            logDemoTempleFile.write(defaultLogTemple)
+        }
+    }
+
+
+    def getCurrentVersionLog(VersionLogDto versionLogDto) {
         def time = System.currentTimeMillis()
         def currentLogs = getUpdateContent(versionLogDto.logFile)
         def log = new VersionLog();
@@ -55,6 +70,7 @@ public class VersionLogTask extends DefaultTask {
         log.addTime = time
         log.updateTime = time
         log.logs.addAll(currentLogs)
+        log.extraMap.putAll(versionLogDto.extraMap)
         return log
 
     }
@@ -73,11 +89,15 @@ public class VersionLogTask extends DefaultTask {
     @TaskAction
     public void run() throws Exception {
         checkVersionLogConfig()
+
         VersionLogConfig versionLogConfig = VersionLogConfig.getConfig(project)
+        createDefaultLogTempleFile(versionLogConfig);
+
         File vLogFile = new File(versionLogConfig.vLogWorkDir, Constant.LOG_SAVE_FILE_NAME)
         VersionLogManager versionLogManager = new VersionLogManager(vLogFile)
         VersionLog versionLog = getCurrentVersionLog(versionLogConfig.logInfo)
-        versionLogManager.add(versionLog)
+        versionLogManager.save(versionLog)
+
         logger.quiet(GSonFactory.instance.GSon.toJson(versionLog))
     }
 

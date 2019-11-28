@@ -17,7 +17,7 @@ class VersionLogPlugin implements Plugin<Project> {
             description "帮助"
             group "Version Log"
             doLast {
-                def content = Utils.getResourceContent("VersionLogManager_help.txt");
+                def content = Utils.getResourceContent("help_version_log_manager.txt");
                 project.logger.quiet(content)
             }
         })
@@ -27,7 +27,7 @@ class VersionLogPlugin implements Plugin<Project> {
     def createVersionLogTask(Project project) {
         project.afterEvaluate {
 
-            project.tasks.create("recordVersionLog", VersionLogTask) {
+            project.tasks.create("logRecord", VersionLogTask) {
                 description "记录日志"
                 group "Version Log"
                 doFirst {
@@ -49,12 +49,12 @@ class VersionLogPlugin implements Plugin<Project> {
                             def _templeFileNameWithSuffix = templeFile.getName()
                             def _templeFileName = Utils.getFileName(templeFile)
 
-                            project.tasks.create("build${_templeFileName.capitalize()}", BuildLogTask) {
-                                description "生成日志"
+                            project.tasks.create("logTemple_${_templeFileName.capitalize()}", BuildLogTask) {
+                                description "根据\"${_templeFileNameWithSuffix}\"模板生成日志"
                                 group "Version Log"
                                 templeFileName _templeFileNameWithSuffix
                                 doFirst {
-                                    project.logger.println("开始生成日志")
+                                    project.logger.println("开始根据模板生成日志")
                                 }
 
                                 doLast {
